@@ -1,14 +1,563 @@
-<!doctype html> <html> <head>
-    <title>Classify your Image!</title>
+
+<!DOCTYPE html>
+<!----------------------------------------------------------------------------------------------
+// IMVAL2001 IBM AI Course final project
+// =============================================================================================
+// Webapp Design and Deployment by: Chin Gon Sin
+// Image Recognition Design and Deployment by: 
+// Webchat Design and Deployment by: 
+//==============================================================================================
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dog Lovers Paradise</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Kavoon" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Rakkas" rel="stylesheet" type="text/css" />
+    
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://drive.google.com/uc?export=view&id=1Owy3w8C7fEJ6aV4cBEVaGvuUO0dZRJOL" rel="stylesheet" />
+    
+    <!--
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> </head> <body style="background-color:black"> <div id="maintext" 
-style="position:absolute; margin:auto; width:700px; height:200px; text-align:center; top:0; bottom: 0; left: 0; right: 0;">
-  <h1 class="text-light mb-2"> Upload your image to be classified! </h1>
-  <h4 class="text-light mb-5">(Please upload images less than 500kb in size)</h4>
-  <form method=post enctype=multipart/form-data>
-     <p class="text-light">
-        <input type=file name=file>
-        <input type=submit value=Upload>
-     </p>
-  </form> </div> </body>
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    -->
+
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top" style="font-family:'Rakkas';">Dog Lovers Paradise</a> 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#services">Identify</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About this project</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="#team">.</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="#contact" id="goContact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome dog lovers!</div>
+            <div class="masthead-heading text-uppercase">It's Lovely to meet you</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">Lets get it on!</a>
+            <div class="masthead-subheading">&nbsp</div>
+            <div class="masthead-subheading">&nbsp</div>
+            <div class="masthead-subheading">&nbsp</div>
+        </div>
+    </header>
+    <!-- Section: identify-->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Identify</h2>
+                <h3 class="section-subheading text-muted">Shows us a photo of the dog that you like! And we will do the rest!</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- identify dog Info -->
+                    <div class="services-item">
+                        <a class="services-link" data-bs-toggle="modal" href="#!">
+                            <div class="services-hover">
+                                <div class="services-hover-content">
+                                    <form action="/predict" method="post" enctype="multipart/form-data" class="services-link">
+                                        <!--Display: Image Upload-->
+                                            <div class="drop-zone">
+                                                <spans>Click to upload</spans>
+                                                <!--
+                                                        <input type=file name=file>
+                                                        <input type=submit value=Upload>
+                                                -->
+                                                
+                                                <input type="file" name="file1" class="drop-zone__input" required="required" accept="image/*" onchange='if (this.value != 0) { this.form.submit(); this.form.reset(); }'>
+                                                
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/R9nKnQ1/pexels-caio-69371.jpg" alt="..." />
+                        </a>
+                        <div class="services-caption" style="background-color: rgba(248, 249, 250); border-radius: 0px 0px 20px 20px;">
+                            <div class="services-caption-heading">Identify Dog</div>
+                            <div class="services-caption-subheading text-muted">Upload any dog photos and get instant identification.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- take care -->
+                    <div class="services-item">
+                        <a class="services-link" data-bs-toggle="modal" href="#!">
+                            <div class="services-hover">
+                                <div class="services-hover-content"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/6w5t77h/pexels-ivan-babydov-7788657.jpg" alt="..." />
+                        </a>
+                        <div class="services-caption" style="background-color: rgba(248, 249, 250); border-
+
+radius: 0px 0px 20px 20px;">
+                            <div class="services-caption-heading">Taking Care of dogs</div>
+                            <div class="services-caption-subheading text-muted">New to dog ownership and need to learn the basics? Find answers to dog care questions.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- diet -->
+                    <div class="services-item">
+                        <a class="services-link" data-bs-toggle="modal" href="#!">
+                            <div class="services-hover">
+                                <div class="services-hover-content"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/4WJGgvz/pexels-cottonbro-6568950.jpg" alt="..." />
+                        </a>
+                        <div class="services-caption" style="background-color: rgba(248, 249, 250); border-
+
+radius: 0px 0px 20px 20px;">
+                            <div class="services-caption-heading">Dog's diet</div>
+                            <div class="services-caption-subheading text-muted">Know more about what food should a healthy dog takes.</div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <p>
+                <span style="color: darkgrey; font-size: 10px; text-align: center; font-style:italic">
+                    * Disclaimer: For the purpose of this final project for IMVAL2001, our dataset is limited to only a few breeds as the total size of all the breeds is outside the free storage capacity of online app deployment platform.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Events -->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Events</h2>
+                <h3 class="section-subheading text-muted">A list of dog gathering events, including festivals, presentations, symposiums, exhibits and more in locations on the island.</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- Event 1 -->
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#!">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/7X1JmG4/item0-thumbnail-carousel-img-740-416.jpg" alt="..." />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Dog Walkathon</div>
+                            <div class="portfolio-caption-subheading text-muted">Sentosa</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- Event 2 -->
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#!">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/jLR5qyT/pexels-ngrh-mei-5166977.jpg" alt="..." />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Care for dogs event</div>
+                            <div class="portfolio-caption-subheading text-muted">Marina Barrage</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- Event 3 -->
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#!">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
+                            </div>
+                            <img class="img-fluid" src="https://i.ibb.co/68MbYkT/mt-faber.jpg" alt="..." />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Groom your dogs</div>
+                            <div class="portfolio-caption-subheading text-muted">Mt Faber</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About-->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">About this project</h2>
+                <h3 class="section-subheading text-muted">A community that gathers dog lovers from all walks of life.</h3>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Interact with others</h2>
+                <h3 class="section-subheading text-muted">Want to get to know other dog lovers? Leave your contact below with a candid descriptions of yourself!</h3>
+            </div>
+
+            <!-- Forms Contact Form -->
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- Name input-->
+                            <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Email address input-->
+                            <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        </div>
+                        <div class="form-group mb-md-0">
+                            <!-- Phone number input-->
+                            <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-textarea mb-md-0">
+                            <!-- Message input-->
+                            <textarea class="form-control" id="message" placeholder="Description of yourself *" data-sb-validations="required"></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">A description is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit success message-->
+                <!-- has successfully submitted-->
+                <div class="d-none" id="submitSuccessMessage">
+                    <div class="text-center text-white mb-3">
+                        <div class="fw-bolder">Form submission successful!</div>
+                    </div>
+                </div>
+                <!-- Submit error message-->
+                <!-- an error submitting the form-->
+                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                <!-- Submit Button-->
+                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Leave your contact</button></div>
+            </form>
+        </div>
+    </section>
+    <!-- Map-->
+
+    <!-- Footer-->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start">Copyright &copy; Dog Lovers Paradise 2022<br><span style="color: 
+
+darkgrey;">Designed by Chin Gon Sin</span></div>
+                <!--
+                <div class="col-lg-4 my-3 my-lg-0">
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                    <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                </div>
+                -->
+            </div>
+        </div>
+    </footer>
+
+    <!--
+    **************************************************************************************************
+    Scripts
+    **************************************************************************************************
+    -->
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+    <!-- Responsive Navigation Menu Bar -->
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+
+            // Navbar shrink function
+            var navbarShrink = function () {
+                const navbarCollapsible = document.body.querySelector('#mainNav');
+                if (!navbarCollapsible) {
+                    return;
+                }
+                if (window.scrollY === 0) {
+                    navbarCollapsible.classList.remove('navbar-shrink')
+                } else {
+                    navbarCollapsible.classList.add('navbar-shrink')
+                }
+
+            };
+
+            // Shrink the navbar
+            navbarShrink();
+
+            // Shrink the navbar when page is scrolled
+            document.addEventListener('scroll', navbarShrink);
+
+            // Activate Bootstrap scrollspy on the main nav element
+            const mainNav = document.body.querySelector('#mainNav');
+            if (mainNav) {
+                new bootstrap.ScrollSpy(document.body, {
+                    target: '#mainNav',
+                    offset: 74,
+                });
+            };
+
+            // Collapse responsive navbar when toggler is visible
+            const navbarToggler = document.body.querySelector('.navbar-toggler');
+            const responsiveNavItems = [].slice.call(
+                document.querySelectorAll('#navbarResponsive .nav-link')
+            );
+            responsiveNavItems.map(function (responsiveNavItem) {
+                responsiveNavItem.addEventListener('click', () => {
+                    if (window.getComputedStyle(navbarToggler).display !== 'none') {
+                        navbarToggler.click();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <!-- Script: Image Upload -->
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                }
+            });
+
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                }
+
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        /**
+         * Updates the thumbnail on a drop zone element.
+         *
+         * @param {HTMLElement} dropZoneElement
+         * @param {File} file
+         */
+        function updateThumbnail(dropZoneElement, file) {
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+
+            // First time - there is no thumbnail element, so lets create it
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+
+            thumbnailElement.dataset.label = file.name;
+
+            // Show thumbnail for image files
+            if (file.type.startsWith("image/")) {
+                const reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                };
+            } else {
+                thumbnailElement.style.backgroundImage = null;
+            }
+        }
+    </script>
+
+
+
+    <!-- Script: Webchat Custom Launcher -->
+    <button type="button" class="chatLauncher" style="display:none;">
+        <div>
+            <strong>Getting bored?</strong> Come have a chat!
+        </div>
+    </button>
+
+    <!--Script: Webchat Custom Launcher-->
+    <script>
+        window.watsonAssistantChatOptions = {
+             integrationID: "3fe7c7d2-43d3-45da-87df-82b318f0d096", // The ID of this integration.
+             region: "us-south", // The region your integration is hosted in.
+             serviceInstanceID: "c7375699-9cac-48aa-aa91-a454d16ecb78", // The ID of your service instance.
+
+            showLauncher: false,
+            onLoad: function (instance) {
+
+                // Detect location
+                function handleLocationSend(event) {
+                    console.log('On entry to pre:send: ', event.data);
+                    if (event.data.input.text === "Detect location") {
+                        //  Creating a promise out of the function
+                        //  Using Navigator to obtain current user location
+                        return new Promise((resolve, reject) => {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function (position) {
+
+                                    lat = position.coords.latitude
+                                    long = position.coords.longitude
+
+                                    console.log('Before updating location: ', event.data.context.skills['main skill'].user_defined.location);
+                                    event.data.context.skills['main skill'].user_defined.latitude = lat;
+                                    event.data.context.skills['main skill'].user_defined.longitude = long;
+                                    event.data.context.skills['main skill'].user_defined.location = true;
+                                    console.log('After updating location: ', event.data.context.skills['main skill'].user_defined.location);
+
+                                    resolve({
+                                    })
+                                })
+                            } else {
+                                reject("Your browser doesn't support geolocation API")
+                            }
+                        })
+                    }
+                }
+                instance.on({ type: "pre:send", handler: handleLocationSend });
+
+                // Select the button element from the page.
+                const button = document.querySelector('.chatLauncher');
+
+                // Add the event listener to open your web chat.
+                button.addEventListener('click', function clickListener() {
+                    instance.openWindow();
+                });
+
+                // Render the web chat. Nothing appears on the page, because the launcher is
+                // hidden and the web chat window is closed by default.
+                instance.render().then(function () {
+                    // Now that web chat has been rendered (but is still closed),
+                    // make the custom launcher button visible.
+                    button.style.display = 'block';
+                    button.classList.add('open');
+                });
+            }
+        };
+
+        setTimeout(function () {
+            const t = document.createElement('script');
+            t.src = 'https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js';
+            document.head.appendChild(t);
+        });
+    </script>
+        
+    <!-- Script: Watson Assistant
+    <!--<script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "d227e822-7c09-4ead-a2ce-e1ec96835baa", // The ID of this integration.
+            region: "us-south", // The region your integration is hosted in.
+            serviceInstanceID: "997476bf-0e7c-4dff-a1fa-36e538910349", // The ID of your service instance.
+            onLoad: function (instance) {
+
+                // Allen WA
+                // integrationID: "d227e822-7c09-4ead-a2ce-e1ec96835baa", // The ID of this integration.
+                // region: "us-south", // The region your integration is hosted in.
+                // serviceInstanceID: "997476bf-0e7c-4dff-a1fa-36e538910349", // The ID of your service instance.
+
+                // Ryan WA
+                // integrationID: "73901565-d0e6-4a25-8245-66b8ffc71592", // The ID of this integration.
+                // region: "us-south", // The region your integration is hosted in.
+                // serviceInstanceID: "ca05e007-6c58-456d-8dfe-deb081913c59", // The ID of your service instance.
+
+                // Detect location
+                function handleLocationSend(event) {
+                    console.log('On entry to pre:send: ', event.data);
+                    if (event.data.input.text === "Detect location") {
+                        //  Creating a promise out of the function
+                        //  Using Navigator to obtain current user location
+                        return new Promise((resolve, reject) => {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function (position) {
+
+                                    lat = position.coords.latitude
+                                    long = position.coords.longitude
+
+                                    console.log('Before updating location: ', event.data.context.skills['main 
+
+skill'].user_defined.location);
+                                    event.data.context.skills['main skill'].user_defined.latitude = lat;
+                                    event.data.context.skills['main skill'].user_defined.longitude = long;
+                                    event.data.context.skills['main skill'].user_defined.location = true;
+                                    console.log('After updating location: ', event.data.context.skills['main 
+
+skill'].user_defined.location);
+
+                                    resolve({
+                                    })
+                                })
+                            } else {
+                                reject("Your browser doesn't support geolocation API")
+                            }
+                        })
+                    }
+                }
+                instance.on({ type: "pre:send", handler: handleLocationSend });
+
+                // Render webchat
+                instance.render();
+            }
+        };
+        setTimeout(function () {
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+            document.head.appendChild(t);
+        });
+    </script>-->
+</body>
 </html>

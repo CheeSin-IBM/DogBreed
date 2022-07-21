@@ -1,1 +1,1 @@
-# ImageClassification
+# Dog Lovers Paradise
